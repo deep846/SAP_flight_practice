@@ -1,0 +1,158 @@
+<mvc:View
+    controllerName="flightdc.controller.view1f"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <content>
+            <t:Table
+                id="t"
+                enableBusyIndicator="true"
+                rows="{dc>/d/results}"
+                selectionMode="Single"
+                rowSelectionChange="onRowSelect"
+            >
+                <t:columns>
+                    <t:Column id="tc">
+                        <t:label>
+                            <Label
+                                id="tl"
+                                text="Carrid"
+                            />
+                        </t:label>
+                        <t:template>
+                            <Text
+                                id="tx"
+                                text="{dc>Carrid}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="tc1">
+                        <t:label>
+                            <Label
+                                id="tl1"
+                                text="Connid"
+                            />
+                        </t:label>
+                        <t:template>
+                            <Text
+                                id="tx1"
+                                text="{dc>Connid}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="tc2">
+                        <t:label>
+                            <Label
+                                id="tl2"
+                                text="Fldate"
+                            />
+                        </t:label>
+                        <t:template>
+                            <Text
+                                id="tx2"
+                                text="{path: 'dc>Fldate', formatter: '.dateFormetterAlone'}"
+                            />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+
+            <Button
+                text="Fetch Data"
+                id="es5"
+                press=".onLoad"
+            />
+
+            <f:SimpleForm id="idSimpleForm">
+                <f:content>
+                    <Label
+                        id="lb2"
+                        text="Carrid"
+                    />
+                    <Text
+                        id="txt2"
+                        text="{dc>Carrid}"
+                    />
+                    <Label
+                        id="lb3"
+                        text="Connid"
+                    />
+                    <Text
+                        id="txt3"
+                        text="{dc>Connid}"
+                    />
+                    <Label
+                        id="lb4"
+                        text="Fldate"
+                    />
+                    <Text
+                        id="txt4"
+                        text="{path: 'dc>Fldate', formatter: '.dateFormetterAlone'}"
+                    />
+                </f:content>
+            </f:SimpleForm>
+            <t:Table
+                id="t12"
+                enableBusyIndicator="true"
+                rows="{dc>zsbookSet/results}"
+                selectionMode="Single"
+                rowSelectionChange="onRowSelect1"
+            >
+                <t:columns>
+                    <t:Column id="tc122">
+                        <t:label>
+                            <Label
+                                id="tl22"
+                                text="Carrier ID"
+                            />
+                        </t:label>
+                        <t:template>
+                            <Text
+                                id="tx12"
+                                text="{dc>Carrid}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="tc1222">
+                        <t:label>
+                            <Label
+                                id="tl222"
+                                text="Booking ID"
+                            />
+                        </t:label>
+                        <t:template>
+                            <Text
+                                id="tx1222"
+                                text="{dc>Bookid}"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="tc12">
+                        <t:label>
+                            <Label
+                                id="tl12"
+                                text="Order Date"
+                            />
+                        </t:label>
+                        <t:template>
+                            <Text
+                                id="tx122"
+                                text="{path: 'dc>OrderDate', formatter: '.dateFormetterAlone'}"
+                            />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+
+            <Text id="kdafjasd" text="{dcc>/results/0/Carrid}"></Text>
+        </content>
+    </Page>
+</mvc:View>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZSFLIGHT_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="zsflight" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Carrid"/>
+                </Key>
+                <Property Name="Carrid" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Airline" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Connid" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Flight Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fldate" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="zsbookSet" Relationship="ZSFLIGHT_SRV.zsflight_dc" FromRole="FromRole_zsflight_dc" ToRole="ToRole_zsflight_dc"/>
+            </EntityType>
+            <EntityType Name="zsbook" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Carrid"/>
+                </Key>
+                <Property Name="Carrid" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Airline" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bookid" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Booking number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OrderDate" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Booking date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="zsflight" Relationship="ZSFLIGHT_SRV.zsflight_dc" FromRole="ToRole_zsflight_dc" ToRole="FromRole_zsflight_dc"/>
+            </EntityType>
+            <Association Name="zsflight_dc" sap:content-version="1">
+                <End Type="ZSFLIGHT_SRV.zsflight" Multiplicity="1" Role="FromRole_zsflight_dc"/>
+                <End Type="ZSFLIGHT_SRV.zsbook" Multiplicity="*" Role="ToRole_zsflight_dc"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_zsflight_dc">
+                        <PropertyRef Name="Carrid"/>
+                    </Principal>
+                    <Dependent Role="ToRole_zsflight_dc">
+                        <PropertyRef Name="Carrid"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZSFLIGHT_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="zsflightSet" EntityType="ZSFLIGHT_SRV.zsflight" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="zsbookSet" EntityType="ZSFLIGHT_SRV.zsbook" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="zsflight_dcSet" Association="ZSFLIGHT_SRV.zsflight_dc" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zsflightSet" Role="FromRole_zsflight_dc"/>
+                    <End EntitySet="zsbookSet" Role="ToRole_zsflight_dc"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://zin-blr-srv1:8001/sap/opu/odata/sap/ZSFLIGHT_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://zin-blr-srv1:8001/sap/opu/odata/sap/ZSFLIGHT_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
